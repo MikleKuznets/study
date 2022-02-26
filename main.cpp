@@ -1,32 +1,37 @@
 #include <stdio.h>
-#include <math.h>
-
-int main()
-
+int main(void)
 {
-    float r, a, d;
-    float s_circle, s_triangle, s_square;
-    float most;
-
-    printf ("r=");
-    scanf ("%f", &r);
+    int a, b = 5, c;
+    float x, y = -.5, z;
     printf ("a=");
-    scanf ("%f", &a);
-    printf ("d=");
-    scanf ("%f", &d);
-
-    s_circle = pow (r,2) * M_PI;
-    s_triangle = ( (pow (a, 2)) * sqrt(3) )/ 4;
-    s_square = pow (d, 2);
-
-    printf ("S circle = %f\n", s_circle);
-    printf ("S triangle = %f\n", s_triangle);
-    printf ("S square = %f\n", s_square);
-
-    most = s_circle < s_triangle ? s_triangle : s_circle;
-    most = most < s_square ? s_square : most;
-
-    printf ("S most = %f\n", most);
-
+    scanf("%d", &a);
+    x = c = a;
+    printf("a=%d, c=%d, x=%f\n", a, c, x);
+    a+= b;
+    printf("a=%d\n",a);
+    x+= b + a;
+    printf("x=%f\n", x);
+    b+=a--;
+    printf("b=%d\n", b);
+    x-=++c;
+    printf("x=%f\n",x);
+    c=a/b;
+    printf("c=%4d\n", c);
+    c=a%b;
+    printf("c=%d\n", c);
+    x=5.3;
+    y+=((--x-1)/x++);
+    printf("x=%f\ty=%.2f\n\n x=%.0f\ty=%.of\n", x-1, y, x, y-1);
+    z=a/2;
+    printf("z=%f\n",z);
+    z=(float)a/2;
+    printf("z=%f\n", z);
+    y=x/2;
+    printf("y=%f\n", y);
+    y=(int)x/2;
+    printf("y=%f\n", y);
+    z=a%2-(x+b)/c+(x-y)/(a-1)+1/4*a-y++ + ++b/3.;
+    printf("a=%d b=%d c=%d x=%f y=%f z=%f\n", a, b, c, x, y, z);
     return 0;
+
 }
