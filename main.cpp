@@ -1,12 +1,10 @@
-// дана строка символов. Удалить из нее все нечетные слова, слова отделяются друг от друга пробелом.
+// дана страка символов. Определить является ли она правильным скобочным выражением.
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <string.h>
 
 int main()
-
 {
     constexpr int size = 255;
     char text[size];
@@ -24,38 +22,47 @@ int main()
 
     for (int a = 0; a < long_text; ++a)
     {
-        if (text[a] == ' ')
-        {
-//            printf ("count = %d\n", count);
 
-            if (count%2)
+        if (text[a] == '(')
+        {
+            for (int b = count; b < long_text; ++b)
             {
-                text[a-count] = '\0';
-                for (int b = 0; b <= count; ++b)
+                if (text[b] == ')')
                 {
-                   text[a - b] = ' ';
+                    printf (" It's true!\n");
+                    goto label2;
                 }
             }
-            else
-            {
-                goto label1;
-            }
-            label1:
-            count = -1;
-
         }
+        else
+        {
+            goto label1;
+        }
+
+        label1:
+
+        if (text[a] == '[')
+        {
+            for (int b = count; b < long_text; ++b)
+            {
+                if (text[b] == ']')
+                {
+                    printf (" It's true!\n");
+                    goto label2;
+                }
+            }
+        }
+        else
+        {
+            goto label3;
+        }
+
+        label3:
         count = count + 1;
     }
 
-    printf ("count = %d\n", count);
-
-    if (count%2)
-    {
-        text[long_text-count] = '\0';
-    }
-
-    printf ("\n");
-    printf ("new text: %s", text);
+    printf (" It's wrong!\n");
+    label2:
 
     return 0;
 }
