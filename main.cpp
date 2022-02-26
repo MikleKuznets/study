@@ -1,26 +1,37 @@
 #include <stdio.h>
 #include <math.h>
 
+
 int main()
-
 {
-    unsigned long long int N;
-    int i;
-    label1:
-    printf ("Enter N=");
-    scanf ("%llu", &N);
+    int a, b, c;
+    int min;
+    bool perfect = false;
 
-    // проверяем натуральность числа //
+    printf ("a =");
+    scanf ("%d", &a);
+    printf ("b =");
+    scanf ("%d", &b);
+    printf ("c =");
+    scanf ("%d", &c);
 
-    if (N == 0)  { printf ("It's wrong!\n");
-            goto label1;
-            }
-            else {
-                for (i=1; N/10>1; ++i)
-                {
-                    N=N/10;
-                }
-            }
-    printf ("count = %d\n", i);
+    // находим наименьшее число
+    min = a < b ? a : b;
+    min = min < c ? min : c;
+//     printf ("min =%d\n", min);
+
+    // находим делители
+    for ( int i = 2; i <= min && perfect == false; ++i)
+    {
+//        printf ("i = %d\n", i);
+
+          if ((a % i)==0 && (b % i)==0 && (c % i)==0)
+          {
+          printf ("number = %d\n", i);
+          perfect = true;
+          }
+
+    }
+    if (perfect == false) printf ("number == 1");
     return 0;
 }
