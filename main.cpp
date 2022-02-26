@@ -1,49 +1,61 @@
-// вычислить сумму элементов матрицы слева от побочной диагонали
+// дана строка символов. Удалить из нее все нечетные слова, слова отделяются друг от друга пробелом.
 
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
-
+#include <time.h>
+#include <string.h>
 
 int main()
+
 {
-    int size = 10;
-    int M[size][size];
-    int sum, count;
+    constexpr int size = 255;
+    char text[size];
+    int count = 0;
+    int long_text = 0;
 
-    srand(time(0));
-
-    printf ("Enter massive = ");
-    scanf ("%d", &size);
+    printf ("Enter text: ");
+    gets (text);
     printf ("\n");
 
-    for (int a = 0; a < size; ++a)
+    while (text[long_text] != '\0')
     {
-        for (int b = 0; b < size; ++b)
+        long_text = long_text + 1;
+    }
+
+    for (int a = 0; a < long_text; ++a)
+    {
+        if (text[a] == ' ')
         {
-            M[a][b] = rand() % 10;
-            printf ("%d ", M[a][b]);
+//            printf ("count = %d\n", count);
+
+            if (count%2)
+            {
+                text[a-count] = '\0';
+                for (int b = 0; b <= count; ++b)
+                {
+                   text[a - b] = ' ';
+                }
+            }
+            else
+            {
+                goto label1;
+            }
+            label1:
+            count = -1;
+
         }
-        printf ("\n");
+        count = count + 1;
+    }
+
+    printf ("count = %d\n", count);
+
+    if (count%2)
+    {
+        text[long_text-count] = '\0';
     }
 
     printf ("\n");
-    count = size - 1;
-    sum = 0;
-    printf ("New massiv = \n");
-
-    for (int a = 0; a < size; ++a)
-    {
-        for (int b = 0; b < count; ++b)
-        {
-            sum = sum + M[a][b];
-            printf ("%d ", M[a][b]);
-        }
-        printf ("\n");
-        count = count - 1;
-    }
-
-    printf("summ = %d\n", sum);
+    printf ("new text: %s", text);
 
     return 0;
 }
