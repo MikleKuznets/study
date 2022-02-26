@@ -1,77 +1,53 @@
-// поменять местами максимальный и последний отрицательный (минимальный) элемент массива М(40)
+// определить местоположение элементов массива А(30), не встречающихся в массиве В(15).
 
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <time.h>
 
-
-using namespace std;
 
 int main()
-
 {
-    constexpr int size = 40;
-    int M[size];
-    int max, min; // числа из массива
-    int count1, count2; // место в массиве
-//    int *max_count = &max;
-//    int *min_count = &min; //  адреса в массиве
+    constexpr int size1 = 30;
+    constexpr int size2 = 15;
+    int A[size1];
+    int B[size2];
+    int poisk = 0;  // вспомогательный
 
     srand(time(0));
 
-    for (int i = 0; i < size; ++i)
+    printf ("Massive A =");
+    for (int a = 0; a < size1; ++a)
     {
-        M[i] = rand() % 10;
+        A[a] = rand() % 10;
+        printf ("%d ", A[a]);
     }
-
-    for (int i = 0; i < size; ++i)   // вывод массива
-    {
-        printf ("M[i] = %d  ", M[i]);
-    }
-
-    max = M[0];
-    min = M[0];
-
-    for (int n = 0; n < size - 1; ++n)
-    {
-        if (max > M[n+1])
-        {
-          max = max;
-        }
-        else
-        {
-            max = M[n+1];
-            count1 = n + 1;
-        }
-//        printf ("max = %d  ", max);
-        if (min < M[n+1])
-        {
-            min = min;
-        }
-        else
-        {
-            min = M[n+1];
-            count2 = n + 1;
-        }
-//        printf ("min = %d  \n", min);
-    }
-
     printf ("\n");
-//    printf ("proverka \n");
-//    printf ("max = %d , min = %d , count1 = %d , count2 = %d \n", max, min, count1, count2);
 
-    M[count1] = min;
-    M[count2] = max;
-
-    printf ("\n");
-    printf ("New massiv \n");
-    printf ("max = %d , min = %d \n", max, min);
-
-    for (int k = 0; k < size; ++k)
+    printf ("Massive B =");
+    for (int b = 0; b < size2; ++b)
     {
-        printf ("M[k] = %d  ", M[k]);
-//        printf ("k = %d ", k);
+        B[b] = rand() % 10;
+        printf ("%d ", B[b]);
+    }
+    printf ("\n");
+
+
+    for (int c = 0; c < size1; ++c)
+    {
+        for (int d = 0; d < size2; ++d)
+        {
+            if (A[c] != B[d])
+            {
+                poisk = poisk +1;
+                if (poisk == 15)
+                {
+                    printf ("A[%d] = %d\n", c, A[c]);
+                }
+            }
+        }
+        poisk = 0;
+
+
     }
 
     return 0;
