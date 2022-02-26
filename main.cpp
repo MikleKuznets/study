@@ -1,37 +1,39 @@
 #include <stdio.h>
 #include <math.h>
-
+#include <string.h>
 
 int main()
 {
-    int a, b, c;
-    int min;
-    bool perfect = false;
 
-    printf ("a =");
-    scanf ("%d", &a);
-    printf ("b =");
-    scanf ("%d", &b);
-    printf ("c =");
-    scanf ("%d", &c);
+    int X;
+    int dop;  // дополнительные переменные для расчётов
+    int count=0;
+    int number [50];
+    int first, last;
 
-    // находим наименьшее число
-    min = a < b ? a : b;
-    min = min < c ? min : c;
-//     printf ("min =%d\n", min);
+    printf ("Enter X = ");
+    scanf ("%d", &X);
 
-    // находим делители
-    for ( int i = 2; i <= min && perfect == false; ++i)
+    do
     {
-//        printf ("i = %d\n", i);
-
-          if ((a % i)==0 && (b % i)==0 && (c % i)==0)
-          {
-          printf ("number = %d\n", i);
-          perfect = true;
-          }
-
+        dop = X / 10;
+        number[count] = X - (dop * 10);
+        count = count + 1;
+        X = X / 10;
     }
-    if (perfect == false) printf ("number == 1");
+    while (X>1);
+
+    first = number [0];
+    last = number [count - 1];
+
+    printf("%d", first);
+
+    for (int i = count-2 ; i > 0 ; i--)
+    {
+          dop = number [i];
+          printf ("%d", dop );
+    }
+
+    printf ("%d", last);
     return 0;
 }
