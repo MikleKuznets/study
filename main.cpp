@@ -1,68 +1,26 @@
-// дана страка символов. Определить является ли она правильным скобочным выражением.
-
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include <math.h>
 
 int main()
+
 {
-    constexpr int size = 255;
-    char text[size];
-    int count = 0;
-    int long_text = 0;
+    unsigned long long int N;
+    int i;
+    label1:
+    printf ("Enter N=");
+    scanf ("%llu", &N);
 
-    printf ("Enter text: ");
-    gets (text);
-    printf ("\n");
+    // проверяем натуральность числа //
 
-    while (text[long_text] != '\0')
-    {
-        long_text = long_text + 1;
-    }
-
-    for (int a = 0; a < long_text; ++a)
-    {
-
-        if (text[a] == '(')
-        {
-            for (int b = count; b < long_text; ++b)
-            {
-                if (text[b] == ')')
-                {
-                    printf (" It's true!\n");
-                    goto label2;
-                }
-            }
-        }
-        else
-        {
+    if (N == 0)  { printf ("It's wrong!\n");
             goto label1;
-        }
-
-        label1:
-
-        if (text[a] == '[')
-        {
-            for (int b = count; b < long_text; ++b)
-            {
-                if (text[b] == ']')
+            }
+            else {
+                for (i=1; N/10>1; ++i)
                 {
-                    printf (" It's true!\n");
-                    goto label2;
+                    N=N/10;
                 }
             }
-        }
-        else
-        {
-            goto label3;
-        }
-
-        label3:
-        count = count + 1;
-    }
-
-    printf (" It's wrong!\n");
-    label2:
-
+    printf ("count = %d\n", i);
     return 0;
 }
