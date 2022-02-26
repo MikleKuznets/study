@@ -4,58 +4,29 @@
 int main()
 
 {
-    float x;
-    float y;
-    float a; // переменная введена, чтобы разбить уравнение - верх //
-    float b, c; // переменная введена, чтобы разбить уравнение - низ //
-    float d; // переменная введена, чтобы разбить уравнение - е в кубе//
+    float r, a, d;
+    float s_circle, s_triangle, s_square;
+    float most;
 
-    printf ("x=");
-    scanf ("%f", &x);
+    printf ("r=");
+    scanf ("%f", &r);
+    printf ("a=");
+    scanf ("%f", &a);
+    printf ("d=");
+    scanf ("%f", &d);
 
-    // верхняя часть уравнения //
+    s_circle = pow (r,2) * M_PI;
+    s_triangle = ( (pow (a, 2)) * sqrt(3) )/ 4;
+    s_square = pow (d, 2);
 
-    a = M_PI / 6;
-    a = x - a;
-    a = cos (a);
-    a = 2 * a + sqrt(2);
+    printf ("S circle = %f\n", s_circle);
+    printf ("S triangle = %f\n", s_triangle);
+    printf ("S square = %f\n", s_square);
 
-    //  printf ("up= %f\n",a);
+    most = s_circle < s_triangle ? s_triangle : s_circle;
+    most = most < s_square ? s_square : most;
 
-    // нижняя часть уравнения //
-
-    b = pow (x, 2);
-    b = sin (b);
-    b = pow (b, 2);
-
-    //  printf ("down1= %f\n", b);
-
-    c = log(x);
-
-    //  printf ("down_log= %f\n", c);
-
-    c = 2 * c;
-    c = 1 / c;
-
-    //  printf ("down2= %f\n", c);
-
-    b = b + c;
-
-    //  printf ("down= %f\n", b);
-
-    // е в кубе //
-
-    d = 3 * x;
-    d = exp (d);
-
-    //  printf ("exp= %f\n", d);
-
-    // финал //
-
-    y = a / b * d;
-
-    printf ("y= %f\n", y);
-
+    printf ("S most = %f\n", most);
 
     return 0;
 }
