@@ -3,37 +3,38 @@
 #include <string.h>
 
 int main()
+
 {
+unsigned long long N;
+int count = 0;
+char number [50];
 
-    int X;
-    int dop;  // дополнительные переменные для расчётов
-    int count=0;
-    int number [50];
-    int first, last;
+printf ("Enter N = ");
+scanf ("%llu", &N);
+//  printf ("%llu", N);
 
-    printf ("Enter X = ");
-    scanf ("%d", &X);
-
-    do
+do
+{
+    if (N % 2)
     {
-        dop = X / 10;
-        number[count] = X - (dop * 10);
-        count = count + 1;
-        X = X / 10;
+        number [count] = '1';
+        printf ("%c", number[count]);
     }
-    while (X>1);
-
-    first = number [0];
-    last = number [count - 1];
-
-    printf("%d", first);
-
-    for (int i = count-2 ; i > 0 ; i--)
+    else
     {
-          dop = number [i];
-          printf ("%d", dop );
+        number [count] = '0';
+        printf ("%c", number[count]);
     }
 
-    printf ("%d", last);
+    count = count + 1;
+    N = N / 2;
+}
+while (N);
+number [count] = '\0';
+for (int i = count-- ; i > 0 ; i--)
+{
+        printf ("%c", number[i-1]);
+}
+
     return 0;
 }
