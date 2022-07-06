@@ -1,15 +1,12 @@
 #include "menu.h"
+#include "finding.h"
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <conio.h>
 #include <cstring>
 #include <string>
-#include "finding.h"
-
 
 void Mymenu::first_menu()
-
 {
 
     system("cls");
@@ -26,55 +23,50 @@ void Mymenu::first_menu()
 void Mymenu::menu_answer()
 {
 
-    std::string file_name, enter_word;
+    std::string file_name;
+    std::string enter_word;
 
     char press = getch();
 
     if (number_menu == 1)
     {
-        file_name = "text";
-
-        strcpy(finding_file, file_name.c_str());
+        finding_file = "C://test/text.txt";
 
     }
 
-        if ((press == 'W')||(press == 'w'))
-        {
-             system ("cls");
-             choise = 1;
-             finding find1(finding_file, finding_word);
-             find1.find_words();
+    if ((press == 'W')||(press == 'w'))
+    {
+         system ("cls");
+         choise = 1;
+         Finding find1(finding_file, finding_word);
+         find1.find_words();
 
-             menu_continue();
-        }
-        if ((press == 'E')||(press == 'e'))
-        {
-             choise = 2;
-             system ("cls");
-             number_menu = 2;
+         menu_continue();
+     }
+     if ((press == 'E')||(press == 'e'))
+     {
+          choise = 2;
+          system ("cls");
+          number_menu = 2;
 
-             menu_file();
+          menu_file();
 
-             finding find1(finding_file, finding_word);
-             find1.find_file();
+          menu_continue();
+     }
+     if ((press == 'F')||(press == 'f'))
+     {
 
-             menu_continue();
-        }
-        if ((press == 'F')||(press == 'f'))
-        {
+          choise = 3;
+          system ("cls");
+          std::cout << "Enter word for search: ";
+          std::cin >> finding_word;
 
-             choise = 3;
-             system ("cls");
-             std::cout << "Enter word for search: ";
-             std::cin >> enter_word;
-             strcpy(finding_word, enter_word.c_str());
+          Finding find2(finding_file, finding_word);
+          find2.finding_word();
 
-             finding find2(finding_file, finding_word);
-             find2.finding_word();
-
-             menu_continue();
-        }
-        if ((press == 'Q')||(press == 'q'))
+          menu_continue();
+     }
+     if ((press == 'Q')||(press == 'q'))
              exit;
 }
 
@@ -105,9 +97,10 @@ char Mymenu::menu_file()
     system("cls");
     std::cout << "Enter file name: ";
     std::cin >> name_file;
+    finding_file = "C://test/";
+    finding_file += name_file;
+    finding_file += ".txt";
 
-    strcpy(finding_file, name_file.c_str());
-    std::cout <<"finding_file - " << finding_file << std::endl;
 }
 
 

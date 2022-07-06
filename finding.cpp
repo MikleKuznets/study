@@ -8,68 +8,40 @@
 #include <ctime>
 
 
-finding::finding(char f[100], char w[100])
-{
-   strcpy(file_name, f);
-   strcpy(find_word, w);
-}
-
-
-finding::~finding()
+Finding::Finding(std::string f, std::string w)
+    :file_name(f)
+    ,find_word(w)
 {
 
 }
 
-void finding::finding_word ()
+
+Finding::~Finding()
 {
 
-    std::string s, word;
-    std::string s1;
-    s1 = "C://test/";
-    s1 += file_name;
-    s1 +=".txt";
-    std::ifstream file(s1);
+}
 
-    char c;
-    int letters = 0;
-    int count = 0;
-    int a = 0;
-    int b = 0;
+void Finding::finding_word()
+{
+    std::string word;
+    int count_letter;
+    int count = -1;
 
-    while (!file.eof())
+    read_text();
+    count_letters (count_letter);
+
+    int place = 0;
+
+    while (place != -1)
     {
-            file.get(c);
-            s.push_back(c);
-    }
+        place = working_text.find(find_word);
 
-    file.close();
+        std:: cout << " place = " << place << std::endl;
+        ++count;
 
-    std::vector<char> s2(s.c_str(), s.c_str() + s.size() + 1);
+        if (place != -1)
+            working_text.erase(place, count_letter);
 
-    while (s2[a] != '\0')
-    {
-        letters = 0;
-        b = a;
-
-        while ((s2[b]!=' ')&&(s2[b]!='.')&&(s2[b]!=','))
-        {
-            word += s2[b];
-            ++b;
-            ++letters;
-
-        }
-        if (word == find_word)
-        {
-            ++count;
-
-            std::cout << "count = " << count << std::endl;
-        }
-
-        word.clear();
-        if (letters == 0)
-            letters = 1;
-
-        a = a + letters;
     }
 
     std::cout << "words (" << find_word << ") found - " << count << " times" << std::endl;
@@ -77,118 +49,103 @@ void finding::finding_word ()
 }
 
 
-void finding::find_file()
+void Finding::find_file()
 {
-    std::string s1;
-    s1 = "C://test/";
-    s1 += file_name;
-    s1 +=".txt";
-    std::ifstream file(s1);
+    read_text();
 
 }
 
-void finding::count_word(int &count_words)
+void Finding::read_text()
 {
-    std::string s1;
-    s1 = "C://test/";
-    s1 += file_name;
-    s1 +=".txt";
-    std::ifstream file(s1);
-    std::string s, word1;
-
+    std::ifstream file(file_name);
     char c;
-    int letters = 0;
-    int count = 0;
-    int a = 0;
-    int b = 0;
-
-//    system ("cls");
-
+    working_text.clear();
     while (!file.eof())
     {
         file.get(c);
-        s.push_back(c);
+        working_text.push_back(c);
     }
 
+    working_text += '\0';
     file.close();
 
-    std::vector<char> s2(s.c_str(), s.c_str() + s.size() + 1);
+}
 
-    while (s2[a] != '\0')
+void Finding::count_letters(int &count_letter)
+{
+    count_letter = size(find_word);
+}
+
+void Finding::count_word(int &count_words)
+{
+    std::string word;
+
+    int letters = 0;
+    int count = 0;
+    unsigned long long a = 0;
+    unsigned long long b = 0;
+
+    while (working_text[a] != '\0')
     {
         letters = 0;
         b = a;
 
-
-        while ((s2[b]!=' ')&&(s2[b]!='.')&&(s2[b]!=','))
+        while ((working_text[b]!=' ')&&(working_text[b]!='.')&&(working_text[b]!=','))
         {
-            word1 += s2[b];
-            ++b;
-            ++letters;
-
-        }
+             word += working_text[b];
+             ++b;
+             ++letters;
+         }
 
         if (letters > 0)
             ++count;
         else
             letters = 1;
 
-    word1.clear();
+        word.clear();
 
-    a = a + letters;
+        a = a + letters;
     }
 
     count_words = count;
 
 }
 
-void finding::find_words ()
+
+void Finding::find_words ()
 {
     unsigned int time_begin, time_end, search_time;
 
     time_begin = clock();
-    std::string s, s1, word1, word2, find_word;
-
-    s1 = "C://test/";
-    s1 += file_name;
-    s1 += ".txt";
-
-    std::ifstream file(s1);
+    std::string word, find_word;
 
     int count;
     int a = 0;
-    int a2 = 0;
-    int b2 = 0;
     int b = 0;
     int ab = 0;
     int letters = 0;
-    int letters2 = 0;
     int else_count = 0;
-    char c;
+
+
+    read_text();
+
+//    std::cout << "we read file: " << file_name << std::endl;
 
     count_word(count);
 
-    while (!file.eof())
-    {
-            file.get(c);
-            s.push_back(c);
-    }
-
-    file.close();
-
-    std::vector<char> s2(s.c_str(), s.c_str() + s.size() + 1);
+//    std::cout << "there " << count << " words" << std::endl;
 
     while (ab != count)
     {
 
-        while (s2[a] != '\0')
+        while (working_text[a] != '\0')
         {
             letters = 0;
             b = a;
 
-            while ((s2[b]!=' ')&&(s2[b]!='.')&&(s2[b]!=','))
+            while ((working_text[b]!=' ')&&(working_text[b]!='.')&&(working_text[b]!=','))
             {
-                word1 += s2[b];
+                word += working_text[b];
                 ++b;
                 ++letters;
 
@@ -196,54 +153,32 @@ void finding::find_words ()
 
             if (letters > 0)
             {
-                find_word = word1;
-                a2 = 0;
 
-                while (s2[a2] != '\0')
+                int place = 0;
+                while (place != -1)
                 {
-                    letters2 = 0;
-                    b2 = a2;
-                    while ((s2[b2]!=' ')&&(s2[b2]!='.')&&(s2[b2]!=','))
-                    {
-                        word2 += s2[b2];
-                        ++b2;
-                        ++letters2;
-                    }
-                    if (letters2 > 0)
-                    {
+                     place = working_text.find(word);
+                     ++else_count;
+                     if (place != -1)
+                         working_text.erase(place, letters);
 
-                        if (find_word == word2)
-                        {
-                            ++else_count;
-                            if (else_count >= 1)
-                            {
-                                for (int del_w = a2; del_w != b2; ++del_w)
-                                    s2[del_w] = ' ';
+                 }
 
-                            }
-                        }
-                    }
-                    word2.clear();
-                    if (letters2 == 0)
-                        letters2 = 1;
+                else_count = else_count - 1;
 
-                    a2 = a2 + letters2;
+                std:: cout << "" << word << " meat " << else_count <<" times" << std::endl;
 
-                }
-
-                std:: cout << "" << word1 << " meat " << else_count <<" times" << std::endl;
                 ab = ab + else_count;
                 else_count = 0;
-
+                word.clear();
+                a = 1;
             }
-            word1.clear();
-            if (letters == 0)
-                letters = 1;
-
-            a = a + letters;
-        }
+            else
+                ++a;
+         }
 
     }
+
     time_end = clock();
 
     search_time = time_end - time_begin;

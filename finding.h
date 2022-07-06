@@ -1,25 +1,27 @@
 #ifndef FINDING_H
 #define FINDING_H
+#include <string>
 
-
-class finding
+class Finding
 {
 public:
-    finding(char f[100], char w[100]);
+    Finding(std::string f, std::string w);
 
-    ~finding();
+    ~Finding();
 
+    void count_letters(int &count_letter);
     void count_word(int &count_words);
+    void read_text();
     void find_words();
     void find_file();
     void finding_word();
 
-//    int count_words;
 
 private:
-    char file_name[100];
-    char find_word[100];
-//    int count_words;
+    std::string file_name;
+    std::string find_word;
+    std::string working_text;
+
 };
 
 
